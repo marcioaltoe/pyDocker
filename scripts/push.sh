@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Parâmetros
-IMAGE_NAME=${1:-pybi}
+IMAGE_NAME=${1:-py-docker}
 IMAGE_TAG=${2:-latest}
 DOCKER_HUB_USER=${3}
 
