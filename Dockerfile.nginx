@@ -6,8 +6,11 @@ WORKDIR /app
 # Update package lists and install required packages
 RUN apt-get update && apt-get install -y
 
+# Remove the default NGINX configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
 # Copy the NGINX configuration
-COPY nginx/nginx.conf /etc/nginx/conf.d
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the HTML content
 COPY nginx/html /usr/share/nginx/html

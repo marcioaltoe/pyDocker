@@ -1,5 +1,3 @@
-# Dockerfile
-
 # Stage 1: Base image with Python and Poetry
 FROM python:3.12-slim as base
 
@@ -34,5 +32,6 @@ COPY --from=builder /app /app
 COPY . /app
 RUN poetry install --no-dev --no-interaction --no-cache
 
+CMD ["poetry", "run", "gunicorn", "--workers", "4", "--bind", "0.0.0.0:5050", "--timeout", "120", "src.app:app"]
+
 EXPOSE 5050
-CMD ["poetry", "run", "gunicorn", "--workers", "4", "--bind", "0.0.0.0:5050", "src.app:app"]
