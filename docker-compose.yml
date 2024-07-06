@@ -1,0 +1,38 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
+    hostname: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - webapp-network
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    hostname: app
+    restart: always
+    image: py-docker:latest
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    networks:
+      - webapp-network
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./src:/app/src
+      - ./poetry.lock:/app/poetry.lock
+      - ./pyproject.toml:/app/pyproject.toml
+
+networks:
+  webapp-network:
+    driver: bridge

@@ -1,0 +1,16 @@
+FROM nginx:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Update package lists and install required packages
+RUN apt-get update && apt-get install -y
+
+# Copy the NGINX configuration
+COPY nginx/nginx.conf /etc/nginx/conf.d
+
+# Copy the HTML content
+COPY nginx/html /usr/share/nginx/html
+
+# Expose port 80 for incoming traffic
+EXPOSE 80
