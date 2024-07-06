@@ -1,5 +1,7 @@
+version: "3.8"
 services:
   nginx:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.nginx
@@ -14,6 +16,7 @@ services:
       - app
 
   app:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
@@ -22,8 +25,9 @@ services:
     restart: always
     image: py-docker:latest
     environment:
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
+      - FLASK_ENV=production
+    #   - FLASK_ENV=development
+    #   - FLASK_DEBUG=1
     networks:
       - webapp-network
     volumes:

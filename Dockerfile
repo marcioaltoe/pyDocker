@@ -1,5 +1,5 @@
 # Stage 1: Base image with Python and Poetry
-FROM python:3.12-slim as base
+FROM --platform=linux/amd64 python:3.12-slim as base
 
 # Set environment variables for Poetry
 ENV POETRY_VERSION=1.8.3 \

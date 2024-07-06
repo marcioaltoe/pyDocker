@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM --platform=linux/amd64 nginx:latest
 
 # Set the working directory inside the container
 WORKDIR /app
